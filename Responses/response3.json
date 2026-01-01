@@ -1,0 +1,20 @@
+{
+  "cell_1": {
+    "people": "person_1",
+    "objects": "Package",
+    "action": "carrying an object",
+    "reasoning": "The person is holding a package near the brick wall and driveway, indicating they are carrying an object."
+  },
+  "cell_2": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "The center cell contains the doormat and brick wall, with no visible interaction involving packages or people."
+  },
+  "cell_3": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "The right cell shows the door and green wreath, with no visible package or person interaction."
+  }
+}

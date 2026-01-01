@@ -1,0 +1,20 @@
+{
+  "cell_1": {
+    "people": "person_1",
+    "objects": "Package",
+    "action": "carrying an object",
+    "reasoning": "Person is carrying a package in the driveway area (cell 1)."
+  },
+  "cell_2": {
+    "people": "person_1",
+    "objects": "Package",
+    "action": "releasing an object",
+    "reasoning": "Package is released on the doormat (cell 2)."
+  },
+  "cell_3": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "No people or packages in cell 3."
+  }
+}

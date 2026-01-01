@@ -1,0 +1,20 @@
+{
+  "cell_1": {
+    "people": "person_1",
+    "objects": "Package",
+    "action": "carrying an object",
+    "reasoning": "The person in the driveway is likely a shipper carrying a package, as the scene is designed to track shippers delivering packages."
+  },
+  "cell_2": {
+    "people": "none",
+    "objects": "Package",
+    "action": "releasing an object",
+    "reasoning": "The package on the doormat is placed on the floor by a shipper."
+  },
+  "cell_3": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "No visible package or person interacting with the door area."
+  }
+}

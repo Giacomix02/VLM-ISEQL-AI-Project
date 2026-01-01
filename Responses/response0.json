@@ -1,0 +1,20 @@
+{
+  "cell_1": {
+    "people": "person_1",
+    "objects": "Package",
+    "action": "carrying an object",
+    "reasoning": "The person on the left side of the image is likely a shipper carrying a package towards the house."
+  },
+  "cell_2": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "The center cell shows the doormat and brick wall with no visible people or packages."
+  },
+  "cell_3": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "The right cell shows the door with no visible people or packages."
+  }
+}

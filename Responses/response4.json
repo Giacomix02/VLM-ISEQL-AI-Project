@@ -1,0 +1,20 @@
+{
+  "cell_1": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "no person or object in this cell"
+  },
+  "cell_2": {
+    "people": "person_1",
+    "objects": "Package",
+    "action": "releasing an object",
+    "reasoning": "person is bending over doormat, releasing package"
+  },
+  "cell_3": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "no person or object in this cell"
+  }
+}

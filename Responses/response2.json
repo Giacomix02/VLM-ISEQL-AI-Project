@@ -1,0 +1,20 @@
+{
+  "cell_1": {
+    "people": "person_1",
+    "objects": "Package",
+    "action": "carrying an object",
+    "reasoning": "person in driveway, likely carrying package as per scene info"
+  },
+  "cell_2": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "brick wall, doormat, no packages or people interacting"
+  },
+  "cell_3": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "door with wreath, no packages or people interacting"
+  }
+}

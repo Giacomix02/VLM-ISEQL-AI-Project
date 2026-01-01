@@ -1,0 +1,20 @@
+{
+  "cell_1": {
+    "people": "person_1",
+    "objects": "Package",
+    "action": "carrying an object",
+    "reasoning": "The person in cell 1 is silhouetted and likely carrying a package, as per the context of package delivery."
+  },
+  "cell_2": {
+    "people": "person_1",
+    "objects": "Package",
+    "action": "releasing an object",
+    "reasoning": "The package on the doormat in cell 2 was likely released by the shipper in cell 1."
+  },
+  "cell_3": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "No people or packages are present in cell 3."
+  }
+}

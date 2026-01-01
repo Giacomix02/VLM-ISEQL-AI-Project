@@ -1,0 +1,20 @@
+{
+  "cell_1": {
+    "people": "person_1",
+    "objects": "Package",
+    "action": "carrying an object",
+    "reasoning": "Person in driveway likely carrying package for delivery, context suggests package delivery."
+  },
+  "cell_2": {
+    "people": "none",
+    "objects": "Package",
+    "action": "releasing an object",
+    "reasoning": "Package on doormat is placed by shipper, indicating release."
+  },
+  "cell_3": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "No visible person or package in door area."
+  }
+}

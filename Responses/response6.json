@@ -1,0 +1,20 @@
+{
+  "cell_1": {
+    "people": "person_1",
+    "objects": "Package",
+    "action": "carrying an object",
+    "reasoning": "Person is walking towards the door, likely delivering a package. Given the context of the scene (tracking shippers), it's reasonable to infer they are carrying a package."
+  },
+  "cell_2": {
+    "people": "person_1",
+    "objects": "Package",
+    "action": "releasing an object",
+    "reasoning": "Package is placed on the doormat, indicating the person released it here."
+  },
+  "cell_3": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "No people or objects related to packages are present in this cell."
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "cell_1": {
+    "people": "person_1",
+    "objects": "Package",
+    "action": "carrying an object",
+    "reasoning": "The person in the driveway is likely carrying a package as per the context of shippers delivering packages."
+  },
+  "cell_2": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "No people or packages are visible in the center cell."
+  },
+  "cell_3": {
+    "people": "none",
+    "objects": "none",
+    "action": "none",
+    "reasoning": "No people or packages are visible in the right cell."
+  }
+}
