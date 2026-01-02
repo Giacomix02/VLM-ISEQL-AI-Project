@@ -1,18 +1,18 @@
 {
   "cell_1": {
-    "reasoning": "The person in the left grid cell is standing on the driveway with arms raised, likely carrying a package as they are a shipper delivering to the door. The action is 'carrying an object' and the object is a package.",
+    "reasoning": "A person is standing in the driveway with arms raised, near the white vehicle.",
     "people": "person_1",
-    "objects": "Package",
-    "action": "carrying an object"
+    "objects": "none",
+    "action": "none"
   },
   "cell_2": {
-    "reasoning": "The central grid cell shows a brick wall and doormat with no visible package or object being interacted with.",
+    "reasoning": "The central area shows a doormat and brick wall with no visible people or packages.",
     "people": "none",
     "objects": "none",
     "action": "none"
   },
   "cell_3": {
-    "reasoning": "The right grid cell shows the door with no package or object being interacted with.",
+    "reasoning": "The right area shows the door with no visible people or packages.",
     "people": "none",
     "objects": "none",
     "action": "none"

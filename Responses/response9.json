@@ -1,18 +1,18 @@
 {
   "cell_1": {
-    "reasoning": "The left grid cell shows the driveway where people come and go. There is a person in the distance, but no visible box or package being carried. Therefore, no objects related to packages are present.",
+    "reasoning": "A person is walking away from the door area, having just released a package.",
     "people": "person_1",
     "objects": "none",
     "action": "none"
   },
   "cell_2": {
-    "reasoning": "The central grid cell contains the doormat with a brick wall behind. A package is visible on the doormat, which is the typical location for package delivery. Since no person is interacting with it, the action is not applicable.",
+    "reasoning": "The central area shows a doormat with a package left on it.",
     "people": "none",
     "objects": "Package",
     "action": "none"
   },
   "cell_3": {
-    "reasoning": "The right grid cell features the door. There are no boxes or packages visible in this area.",
+    "reasoning": "The right area shows the door with no visible people or packages.",
     "people": "none",
     "objects": "none",
     "action": "none"
