@@ -1,0 +1,10 @@
+video_frame,cell_number,people,objects,action
+0,1,person_1,Package,carrying an object
+0,2,none,none,none
+0,3,none,none,none
+1,1,person_1,Package,carrying an object
+1,2,none,none,none
+1,3,none,none,none
+2,1,person_1,Package,carrying an object
+2,2,none,none,none
+2,3,none,none,none
