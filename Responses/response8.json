@@ -1,20 +1,20 @@
 {
   "cell_1": {
+    "reasoning": "Left grid cell: Person in driveway, likely carrying a package as per shipper activity. Action: carrying an object. Objects: package.",
     "people": "person_1",
     "objects": "Package",
-    "action": "carrying an object",
-    "reasoning": "Person in driveway likely carrying package for delivery, context suggests package delivery."
+    "action": "carrying an object"
   },
   "cell_2": {
+    "reasoning": "Central grid cell: Package on doormat, not being interacted with. Action: none. Objects: package.",
     "people": "none",
     "objects": "Package",
-    "action": "releasing an object",
-    "reasoning": "Package on doormat is placed by shipper, indicating release."
+    "action": "releasing an object"
   },
   "cell_3": {
+    "reasoning": "Right grid cell: Door, no packages or people. Action: none. Objects: none.",
     "people": "none",
     "objects": "none",
-    "action": "none",
-    "reasoning": "No visible person or package in door area."
+    "action": "none"
   }
 }

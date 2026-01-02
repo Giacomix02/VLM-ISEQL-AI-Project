@@ -1,20 +1,20 @@
 {
   "cell_1": {
+    "reasoning": "Left grid cell (driveway) shows a person walking but no visible package or object being carried. No action is observed.",
     "people": "person_1",
-    "objects": "Package",
-    "action": "carrying an object",
-    "reasoning": "The person on the left side of the image is likely a shipper carrying a package towards the house."
+    "objects": "none",
+    "action": "none"
   },
   "cell_2": {
+    "reasoning": "Central grid cell (doormat area) has no visible package or object. No action is observed.",
     "people": "none",
     "objects": "none",
-    "action": "none",
-    "reasoning": "The center cell shows the doormat and brick wall with no visible people or packages."
+    "action": "none"
   },
   "cell_3": {
+    "reasoning": "Right grid cell (door) has no visible package or object. No action is observed.",
     "people": "none",
     "objects": "none",
-    "action": "none",
-    "reasoning": "The right cell shows the door with no visible people or packages."
+    "action": "none"
   }
 }

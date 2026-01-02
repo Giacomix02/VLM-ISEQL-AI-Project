@@ -1,20 +1,20 @@
 {
   "cell_1": {
+    "reasoning": "Left grid cell shows a person standing in the driveway near a vehicle. No visible box or package is being carried by the person, so no objects or actions are present.",
     "people": "person_1",
-    "objects": "Package",
-    "action": "carrying an object",
-    "reasoning": "Person is carrying a package in the driveway area (cell 1)."
+    "objects": "none",
+    "action": "none"
   },
   "cell_2": {
-    "people": "person_1",
+    "reasoning": "Central grid cell contains a doormat with a white object. Given the context of the scene (packages are left here), this object is identified as a package. No interaction is observed, so only the object is noted.",
+    "people": "none",
     "objects": "Package",
-    "action": "releasing an object",
-    "reasoning": "Package is released on the doormat (cell 2)."
+    "action": "none"
   },
   "cell_3": {
+    "reasoning": "Right grid cell shows the door with a wreath. No packages or objects are present, so no objects or actions are noted.",
     "people": "none",
     "objects": "none",
-    "action": "none",
-    "reasoning": "No people or packages in cell 3."
+    "action": "none"
   }
 }
