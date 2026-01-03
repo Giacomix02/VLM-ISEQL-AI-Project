@@ -1,7 +1,7 @@
 # VLM-ISEQL Task Report
 
 ## 1. Task Specification
-> In the context of the video surveillance architecture combining VLM >and ISEQL, please
+> In the context of the video surveillance architecture combining VLM and ISEQL, please
 implement and test the first two levels of the pipeline on video in different contexts
 (including homemade). As regards VLMs, you could use qwen 2.5 or other versions on ollama,
 gemini 1.5 robotics view on Google AI studio via API Key, or any other tool deemed
@@ -32,20 +32,23 @@ Referring to the original pipeline, the overlapped grid frame (the so called **V
 
 Each frame has been structured into a 1x3 matrix, so 1 row and 3 columns, in this case we will refer to them as **3 cells**. This structure will also be used by the VLM to provide descriptions of what happens in each cell of the frame.
 
+As you can see in the following image, no frame label has been used, that is because we obtained better outcomes with this setup from the VLM than with labels.
+
 ![Frame Gridded](./report_images/gridded_frame.png)
 
 #### 3.1.3 Base 64 Conversion
 The final step of this first phase in the **base 64 conversion** of each frame, that is the input for the next layer, the VLM.
-
 
 ### 3.2 From VLM to Data Adaptation Module: From the First to the Second Level of the Pipeline
 The first level of the pipeline **analyses frames** in base 64, elaborated in the previous preprocessing phase.
 Now **Frame-Reasoning** is performed by the VLM to provide the next level a coherent input.
 
 #### 3.2.1 VLM choice
-We tried several models on ollama, and this was by far the most challenging part of the project, because powerful models comes with limited, very limited tokens. So we had to find a trade-off between power and enough tokens to test our project.
+This was by far the most challenging part of the project, since we tried several models locally on ollama with a NVIDIA GeForce RTX 3060 Ti with 8GB of VRAM, but also online even if powerful models comes with limited, very limited tokens online.
 
-On four video we tested five models in total, with different amount of parameters:
+So we had to evaluate several aspects, going from online very token-limited models and offline power.
+
+On four video we tested several models with different amount of parameters. Starting offline with our GPU, we tried to test some models:
 
 ```python
 class Models(Enum):
@@ -58,23 +61,36 @@ class Models(Enum):
     mistral_14 = "ministral-3:14b"
 ```
 
-Even if not listed here, we also tried Google AI Robotics 1.5, and even if it performs pretty well, it has a RPD and RPM insufficient even for testing.
-
 About some of the models listed:
 - qwen3_8 is very good in general, but it is very slow on our hardware since it takes ~20 minutes per video analysis
 - gemma3_12 is not providing good outcomes... Several analysis are wrong
 - mistral_14 is pretty quick since it takes ~15 minutes per frame, but don't recognize packages on the floor
 
-We decided to use ```qwen3_8``` since it was the one that gave us the tradeoff that we were searching.
+We also tried the online version of gemma3_27b but outcomes were not satisfying at all.
+
+Although not listed here, we would also have liked to try Google AI Robotics 1.5, but it has a RPD and RPM insufficient even for testing, so.. encouraged by several good outcomes offline, we decided to use the offline model ```qwen3_8```, since it provides the best trade-off ratio among all the other models.
 
 #### 3.2.2 VLM: Frame-Reasoning
 The **base 64** string from the **preprocessing phase** is analysed by the VLM and produces a **textual description** already **serialized**, it is a JSON-string for each cell of the frame.
 
-This is made possible by the prompt that was provided to the VLM:
 
-> You are a video surveillance VLM, analyze the image I sent you and reply only with a json representation of what is in each grid cell.
+To achieve such a complex task we tested a lot of prompts and what we noticed is that even with a very-specific prompt, the model was analysing several frames in a bad way.
+
+> **Example**
 >
-> **notice that {SCENE_INFO_FEDEX} is the context of the provided video, this row is not included in the prompt**
+> Real-world context: the courier is dropping off the package on the door's carpet
+>
+> Deduced context: the courier is going to open the door
+
+This issue was due to the lack of context from the previous frame analysis, in fact this data was not being provided to the VLM to improve further analysis. Providing the VLM such data and running analysis once again, provided good results.
+
+In the following snippet you can find the prompt that was provided to the VLM:
+
+> **Notice that {SCENE_INFO_FEDEX} is the context of the provided video, this row is not included in the prompt**
+>
+> Prompt:
+>
+> You are a video surveillance VLM, analyze the image I sent you and reply only with a json representation of what is in each grid cell.
 >
 > Scene info: {SCENE_INFO_FEDEX}
 >
@@ -91,7 +107,7 @@ This is made possible by the prompt that was provided to the VLM:
 >
 > Print the output as a json for all 3 grid cells
 
-And about these cells... Here you can see the structure of each cell in a JSON-string format:
+And about these cells... Here you can see the structure of each cell in the JSON-string format:
 
 > **Referring to the i-th cell of the frame**
 >
