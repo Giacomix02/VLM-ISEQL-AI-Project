@@ -42,8 +42,56 @@ The final step of this first phase in the **base 64 conversion** of each frame, 
 The first level of the pipeline **analyses frames** in base 64, elaborated in the previous preprocessing phase.
 Now **Frame-Reasoning** is performed by the VLM to provide the next level a coherent input.
 
-#### 3.2.1 VLM: Frame-Reasoning
-The **base 64** string is analysed by the VLM and produces a **textual description** already **serialized**, it is a JSON-string for each cell of the frame, that has the following structure.
+#### 3.2.1 VLM choice
+We tried several models on ollama, and this was by far the most challenging part of the project, because powerful models comes with limited, very limited tokens. So we had to find a trade-off between power and enough tokens to test our project.
+
+On four video we tested five models in total, with different amount of parameters:
+
+```python
+class Models(Enum):
+    qwen3_2 = "qwen3-vl:2b"
+    qwen3_4 = "qwen3-vl:4b"
+    qwen3_8 = "qwen3-vl:8b"
+    gemma3_4 = "gemma3:4b"
+    gemma3_12 = "gemma3:12b"
+    mistral_8 = "ministral-3:8b"
+    mistral_14 = "ministral-3:14b"
+```
+
+Even if not listed here, we also tried Google AI Robotics 1.5, and even if it performs pretty well, it has a RPD and RPM insufficient even for testing.
+
+About some of the models listed:
+- qwen3_8 is very good in general, but it is very slow on our hardware since it takes ~20 minutes per video analysis
+- gemma3_12 is not providing good outcomes... Several analysis are wrong
+- mistral_14 is pretty quick since it takes ~15 minutes per frame, but don't recognize packages on the floor
+
+We decided to use ```qwen3_8``` since it was the one that gave us the tradeoff that we were searching.
+
+#### 3.2.2 VLM: Frame-Reasoning
+The **base 64** string from the **preprocessing phase** is analysed by the VLM and produces a **textual description** already **serialized**, it is a JSON-string for each cell of the frame.
+
+This is made possible by the prompt that was provided to the VLM:
+
+> You are a video surveillance VLM, analyze the image I sent you and reply only with a json representation of what is in each grid cell.
+>
+> **notice that {SCENE_INFO_FEDEX} is the context of the provided video, this row is not included in the prompt**
+>
+> Scene info: {SCENE_INFO_FEDEX}
+>
+> Each cell in the json is numbered from left to right.
+> If you think that shippers are carrying a box or a package insert it in the json inside objects section. Consider that Boxes or Packages can be placed on the floor by a person or shippers.
+>
+> Inside the json insert the action of what the person is doing, explain it in the description.
+>
+> Inside the json action: if the shipper or the person is delivering/carrying the box/package/object insert "carrying an object", if the shipper is releasing the box/package/object insert "releasing an object".
+>
+> If you don't recognize the objects inside the cells but are related to boxes or packages insert "Other" in the objects section, instead if it is a package insert "package".
+>
+> If you see boxes or packages not being interacted with anybody don't insert any action, insert the presence of the object in the objects section of the json.
+>
+> Print the output as a json for all 3 grid cells
+
+And about these cells... Here you can see the structure of each cell in a JSON-string format:
 
 > **Referring to the i-th cell of the frame**
 >
@@ -56,6 +104,14 @@ The **base 64** string is analysed by the VLM and produces a **textual descripti
 >  }
 >```
 
-Since a video is composed by multiple frames, this cells will be packed into a JSON-array string
+Since a video is composed by multiple frames, these cells will be packed into a JSON-array string.
+
+This serialized data will be the input for the next level, the Data Adaptation Module.
 
 ### 3.3 From Data Adaptation Module: To the Third Level of the Pipeline
+Given serialized data provided by the VLM (the first level of the pipeline), the Data Adaptation Module **deserializes** data and provides input for the next level of the pipeline, the **Interval Action Detector**.
+
+#### 3.3.1 Deserialization and Third Level Input Formatting
+This second level of the pipeline is specialized in deserializing the input, retrieving the original JSON structure. This is then **converted** into a suitable temporal database-like format for the next level, respecting the **Single Time-Point Labeling** introduced in the full pipeline.
+
+The JSON structure is suitable as an input for the next phase, but we still decided to use a ```.csv``` format for this purpose.
