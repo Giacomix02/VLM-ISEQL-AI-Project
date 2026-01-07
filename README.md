@@ -128,6 +128,24 @@ This serialized data will be the input for the next level, the Data Adaptation M
 Given serialized data provided by the VLM (the first level of the pipeline), the Data Adaptation Module **deserializes** data and provides input for the next level of the pipeline, the **Interval Action Detector**.
 
 #### 3.3.1 Deserialization and Third Level Input Formatting
-This second level of the pipeline is specialized in deserializing the input, retrieving the original JSON structure. This is then **converted** into a suitable temporal database-like format for the next level, respecting the **Single Time-Point Labeling** introduced in the full pipeline.
+This second level of the pipeline is specialized in deserializing the input, retrieving the original JSON structure. This is then **converted** into a suitable format for the next level, respecting the **Single Time-Point Labeling** introduced in the full pipeline.
 
-The JSON structure is suitable as an input for the next phase, but we still decided to use a ```.csv``` format for this purpose.
+Several formats could be adopted as an input for the next phase, like the JSON produced in the previous phase or a classical .csv file, also a raw data map can be used, but we decided to implement a **simple relational database** in **MySQL** to address a certain degree of engineerization.
+
+Since our pipeline involves simple scenarios, we still thought about future-proofness, making a easily expandible database with all the necessary relationships.
+
+The database structure is pretty straightforward. We've got our main entities like **Video**, **Person**, **Object**, and **Action** that store the basic info. 
+
+Then we have **Video_Frame** which acts as a bridge between videos and their frames - each frame is identified by its frame number and which video it belongs to (using a composite key).
+
+The most important table is **Frame_Cell**, which represents each cell in our gridded frames. This is where all the actual analysis data gets stored, for each cell we save:
+- Which frame and video it belongs to
+- The cell number (1, 2, or 3 in our case)
+- The reasoning text that the VLM generated
+- References to what person, object, and action were detected (these are optional foreign keys)
+
+All the foreign key relationships are set up so everything connects properly: frames link to videos, cells link to frames (using that composite key), and cells can optionally reference persons, objects, and actions depending on what was detected in that specific cell.
+
+This way we can easily query stuff like "show me all frames where someone was carrying a package" or "what actions happened in video X at frame Y" without having to parse through tons of JSON strings.
+
+Now that the database is set up, we have everything about the first two levels of the pipeline, and we're ready for a possible extension to the next levels.
