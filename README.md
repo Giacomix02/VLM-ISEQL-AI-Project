@@ -146,6 +146,4 @@ The most important table is **Frame_Cell**, which represents each cell in our gr
 
 All the foreign key relationships are set up so everything connects properly: frames link to videos, cells link to frames (using that composite key), and cells can optionally reference persons, objects, and actions depending on what was detected in that specific cell.
 
-This way we can easily query stuff like "show me all frames where someone was carrying a package" or "what actions happened in video X at frame Y" without having to parse through tons of JSON strings.
-
-Now that the database is set up, we have everything about the first two levels of the pipeline, and we're ready for a possible extension to the next levels.
+In this way the DB is ready to continue in the pipeline, for example to extract data with ISEQL. 
